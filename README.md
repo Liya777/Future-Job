@@ -3,4 +3,4 @@
 
 cd src
 
-python 
+python scraper.py
