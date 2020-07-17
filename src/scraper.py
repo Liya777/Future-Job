@@ -19,13 +19,14 @@ links = []
 sources = []
 
 # Retrieve information from Monster
-url = "https://www.monster.com/jobs/search/?q=Software-Engineer&where=India&stpage=1&page=2"
+url = "https://www.monster.com/jobs/search/?q=Data-Analyst&where=India"
 job_elems = retriever.retrieveJobsMonster(url)
 source = "Monster"
-processor.processDataMonster(job_elems, source, jobList, titles, companies, locations, times, links, sources)
+processor.processDataMonster(
+    job_elems, source, jobList, titles, companies, locations, times, links, sources)
 
 # Retrieve information from Indeed
-urlBase = "https://www.indeed.co.in/jobs?q=software+engineer&limit=50&radius=25&start=50"
+urlBase = "https://www.indeed.co.in/jobs?q=it+support&l=&radius=25&start=20"
 pages = np.arange(0, 200, 50)
 
 # Scroll through first 5 pages
@@ -34,12 +35,14 @@ for page in pages:
     job_elems = retriever.retrieveJobsIndeed(url)
     source = "Indeed"
 
-    processor.processDataIndeed(job_elems, source, jobList, titles, companies, locations, times, links, sources)
+    processor.processDataIndeed(
+        job_elems, source, jobList, titles, companies, locations, times, links, sources)
 
     sleep(randint(2, 5))
 
 # Create pandas DataFrame
-jobFrame = builder.frameBuild(titles, companies, locations, times, links, sources)
+jobFrame = builder.frameBuild(
+    titles, companies, locations, times, links, sources)
 
 jsonPath = "..\\data\\jobs.json"
 csvPath = "..\\data\\jobs.csv"
